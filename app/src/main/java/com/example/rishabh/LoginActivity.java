@@ -48,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
     DatabaseReference mDatabase = database.getReference();
     SignInButton signInButton;
     String account_name;
-    private final static int RC_SIGN_IN = 9220;
+    private final static int RC_SIGN_IN = 9114;
     //    GoogleSignInClient mGoogleSignInClient;
     GoogleApiClient mGoogleApiClient;
     FirebaseAuth.AuthStateListener mAuthListener;
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
-        mAuth = FirebaseAuth.getInstance();
+        //mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -94,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                 signIn();
             }
         });
+        setGooglePlusButtonText(signInButton, "Sign in with MNIT account");
     }
 
     @Override
@@ -125,7 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = _emailText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        // TODO: Implement your own authentication logic here.
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -252,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
             if (access) {
                 Intent intent = new Intent(this, NewsFeed.class);
                 startActivity(intent);
+                finish();
             }
             else {
                 signOut();
@@ -314,5 +316,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         return valid;
+    }
+    protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
+        // Find the TextView that is inside of the SignInButton and set its text
+        for (int i = 0; i < signInButton.getChildCount(); i++) {
+            View v = signInButton.getChildAt(i);
+
+            if (v instanceof TextView) {
+                TextView tv = (TextView) v;
+                tv.setText(buttonText);
+                return;
+            }
+        }
     }
 }
