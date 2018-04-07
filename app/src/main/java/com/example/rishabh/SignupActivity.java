@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -98,11 +100,26 @@ public class SignupActivity extends AppCompatActivity {
                         else{
                             Log.v("LoginActivity", "Successfully Registered");
                             User new_user = new User(name,email,password,mobile);
-                            Log.v("LoginActivity", "Registered Obj");
+                            Log.v("LoginActivity", "Hoja0");
+/*
                             //mDatabase.push().setValue(email);
                             mDatabase.child("hello").setValue(mobile);
-                            mDatabase.child("users").child(email).setValue("name");
-                            Log.v("LoginActivity", "Registered Data");
+                            DatabaseReference ref =mDatabase.child("users");
+                            ref.child("User 1").setValue("jafyuifg");
+//                            mDatabase.child("users").child(email).setValue("name");
+                            Log.v("LoginActivity", "Registered Data");*/
+
+                            DatabaseReference myRef = mDatabase.child("users");
+                            myRef.setValue("User");
+                            DatabaseReference mUser = myRef.child(mobile);
+                            Log.v("Log","Hoja1");
+                            HashMap<String,String> user = new HashMap<String, String>();
+                            user.put("Name",name);
+                            user.put("Email",email);
+                            user.put("Mobile",mobile);
+                            user.put("Password",password);
+                            mUser.setValue(user);
+                            Log.v("Log","Hoja");
                         }
                     }
                 });
