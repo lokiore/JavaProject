@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1080471696054:android:5aef1e8e8ec061c8",
         "android_client_info": {
-          "package_name": "com.example.rishabh"
+          "package_name": "com.examle.rishabh"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "1080471696054-v387lm0skiikr3n88gbiehrtt4e5ilsg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.rishabh",
+            "package_name": "com.examle.rishabh",
             "certificate_hash": "1be5d67161cef59ab844e73713df5281a861ec6c"
           }
         },
@@ -59,11 +59,63 @@
       },
       "oauth_client": [
         {
+          "client_id": "1080471696054-r0v4kecc1g011iavm03is2ua3i7o991i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rishabh",
+            "certificate_hash": "fb7eb99463fe8c1f7703f923c9bd8b7dcefdc7ca"
+          }
+        },
+        {
           "client_id": "1080471696054-ot3tqaj8rfmlhq8rdb3p2bt5br2fo2ev.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.rishabh",
             "certificate_hash": "1be5d67161cef59ab844e73713df5281a861ec6c"
+          }
+        },
+        {
+          "client_id": "1080471696054-bnsho0clupsf6987qbn9cuj1cv7hl3jk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBasFEm90Kvdr1I9-raqBdqo_BBf1ZZ0rA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1080471696054-bnsho0clupsf6987qbn9cuj1cv7hl3jk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1080471696054:android:e60aeff65cae8072",
+        "android_client_info": {
+          "package_name": "com.sourcey.materiallogindemo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1080471696054-2chaarp6ne4ltu05giofmvkla4uj950f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sourcey.materiallogindemo",
+            "certificate_hash": "3d3382d95dcef3205acda561c1f818bb5f7e9e27"
           }
         },
         {

@@ -12,7 +12,7 @@ public class User {
     public User(){}
     public User( String n , String e, String p, String m)
     {
-        username = "";
+        username = null;
         name = n;
         email = e;
         password = p;

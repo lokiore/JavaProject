@@ -6,17 +6,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 
 public class MainActivity extends AppCompatActivity {
-
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        FirebaseUser user = mAuth.getCurrentUser();
+        if(user==null){
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Intent intent = new Intent(this, NewsFeed.class);
+            startActivity(intent);
+        }
+        finish();
+        System.exit(0);
     }
 
     @Override

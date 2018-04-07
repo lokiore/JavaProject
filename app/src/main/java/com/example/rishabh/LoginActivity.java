@@ -2,6 +2,7 @@ package com.example.rishabh;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
@@ -11,6 +12,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,13 +33,18 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(com.example.rishabh.R.id.input_password) EditText _passwordText;
     @BindView(com.example.rishabh.R.id.btn_login) Button _loginButton;
     @BindView(com.example.rishabh.R.id.link_signup) TextView _signupLink;
-    
+
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference mDatabase = database.getReference();
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.example.rishabh.R.layout.activity_login);
         ButterKnife.bind(this);
-        
+
         _loginButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -51,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
     public void login() {
         Log.d(TAG, "Login");
 
@@ -71,6 +87,27 @@ public class LoginActivity extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         // TODO: Implement your own authentication logic here.
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d(TAG, "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Log.v("Log","user");
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Inavlid Email/Password Combination",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+
+                        // ...
+                    }
+                });
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -83,7 +120,17 @@ public class LoginActivity extends AppCompatActivity {
                 }, 3000);
     }
 
-
+    private void updateUI(FirebaseUser user) {
+        //hideProgressDialog();
+        if (user != null) {
+            Log.v("Log","Login");
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        } else {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_SIGNUP) {
