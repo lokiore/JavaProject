@@ -226,7 +226,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    protected void signOut(){
+    public void signOut(){
         mAuth.signOut();
         mGoogleSignInClient.signOut().addOnCompleteListener(this,
                 new OnCompleteListener<Void>() {
@@ -251,7 +251,7 @@ public class LoginActivity extends AppCompatActivity {
 
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             if (access) {
-                Intent intent = new Intent(this, NewsFeed.class);
+                Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
                 finish();
             }

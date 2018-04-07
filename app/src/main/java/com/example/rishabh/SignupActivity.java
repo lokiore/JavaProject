@@ -108,7 +108,8 @@ public class SignupActivity extends AppCompatActivity {
                             Log.v("LoginActivity", "Registered Data");*/
 
                             DatabaseReference myRef = mDatabase.child("users");
-                            myRef.setValue("User");
+                            myRef.push().setValue("User");
+                            myRef = mDatabase.child("users");
                             DatabaseReference mUser = myRef.child(mobile);
                             Log.v("Log","Hoja1");
                             HashMap<String,String> user = new HashMap<String, String>();
@@ -138,7 +139,10 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
         finish();
+
     }
 
     public void onSignupFailed() {
