@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
             //mAuth.signOut();
             Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
-            mAuth.signOut();
+            //mAuth.signOut();
             finish();
         }
     }
