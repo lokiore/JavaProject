@@ -14,7 +14,11 @@
     <string name="Log_in">Login</string>
     <string name="repassword_hint">Re-enter Password</string>
     <string name="action_settings">action_settings</string>
-
+    <string name="prof_email">E-mail</string>
+    <string name="prof_name">Name</string>
+    <string name="prof_mobile">Mobile</string>
+    <string name="prof_pass">Password</string>
+    <string name="prof_college">College</string>
 
 
     <!-- Setting-->

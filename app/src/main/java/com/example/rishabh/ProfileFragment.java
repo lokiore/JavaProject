@@ -1,6 +1,7 @@
 package com.example.rishabh;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
@@ -37,7 +38,6 @@ import butterknife.BindView;
 public class ProfileFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
 
-
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -62,7 +62,6 @@ public class ProfileFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -70,6 +69,16 @@ public class ProfileFragment extends Fragment {
         //in your OnCreate() method
 
         final View v =  inflater.inflate(R.layout.fragment_profile, container, false);
+        TextView clickMyProf = v.findViewById(R.id.click_my_prof);
+
+        clickMyProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(),DispProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         ImageView imageView = v.findViewById(R.id.profile_picture);
         TextView username = v.findViewById(R.id.username);
         TextView email = v.findViewById(R.id.email);
