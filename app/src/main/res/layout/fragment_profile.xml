@@ -70,7 +70,8 @@
                 android:gravity="center"
                 android:layout_weight="1"
                 android:orientation="horizontal"
-                tools:ignore="ExtraText">
+                tools:ignore="ExtraText"
+                android:id="@+id/my_profile">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -179,6 +180,7 @@
                     android:layout_marginRight="10dp"/>
 
                 <TextView
+                    android:id="@+id/sign_out"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="4"

@@ -24,6 +24,9 @@ public class DispProfileActivity extends AppCompatActivity {
         RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
         roundedBitmapDrawable.setCircular(true);
         imageView.setImageDrawable(roundedBitmapDrawable);
+
+
+
     }
 
 

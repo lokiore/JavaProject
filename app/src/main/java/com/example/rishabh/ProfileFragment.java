@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.ImageFormat;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -16,10 +17,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -69,16 +74,7 @@ public class ProfileFragment extends Fragment {
         //in your OnCreate() method
 
         final View v =  inflater.inflate(R.layout.fragment_profile, container, false);
-        TextView clickMyProf = v.findViewById(R.id.click_my_prof);
 
-        clickMyProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getActivity(),DispProfileActivity.class);
-                startActivity(intent);
-            }
-        });
         ImageView imageView = v.findViewById(R.id.profile_picture);
         TextView username = v.findViewById(R.id.username);
         TextView email = v.findViewById(R.id.email);
@@ -129,10 +125,51 @@ public class ProfileFragment extends Fragment {
             }
 
         }
+        LinearLayout myProfile = v.findViewById(R.id.my_profile);
+        myProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getActivity(),DispProfileActivity.class);
+                startActivity(intent);
+            }
+        });
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.photo);
         RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
         roundedBitmapDrawable.setCircular(true);
         imageView.setImageDrawable(roundedBitmapDrawable);
+
+        TextView signoutView = v.findViewById(R.id.sign_out);
+        signoutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                if(mAuth!=null){
+                    mAuth.signOut();
+
+                    //finish();
+                }
+                if(acct!=null){
+                    GoogleSignInClient mGoogleSignInClient = GoogleSignIn.getClient(getActivity(), LoginActivity.gso);
+                    mGoogleSignInClient.signOut().addOnCompleteListener(getActivity(),
+                            new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    //updateUI1(null);
+                                }
+                            });
+                }
+                Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
+
         return v;
     }
 

@@ -1,6 +1,7 @@
 package com.example.rishabh;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +38,7 @@ import butterknife.ButterKnife;
 public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-
+    public static GoogleSignInOptions gso;
     @BindView(com.example.rishabh.R.id.input_email) EditText _emailText;
     @BindView(com.example.rishabh.R.id.input_password) EditText _passwordText;
     @BindView(com.example.rishabh.R.id.btn_login) Button _loginButton;
@@ -81,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         });
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
         //mAuth = FirebaseAuth.getInstance();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+         gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
@@ -168,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
 //                false, null, null, null, null);
         Log.v("TAG", "sign in intent"+signInIntent.toString());
         startActivityForResult(signInIntent, RC_SIGN_IN);
+        Log.v("TAG","YAHANB BHI AAYA");
 
     }
 
@@ -251,12 +253,22 @@ public class LoginActivity extends AppCompatActivity {
 
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
             if (access) {
+                GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+                if (acct != null) {
+                    String personName = acct.getDisplayName();
+                    String personGivenName = acct.getGivenName();
+                    String personFamilyName = acct.getFamilyName();
+                    String personEmail = acct.getEmail();
+                    String personId = acct.getId();
+                    Uri personPhoto = acct.getPhotoUrl();
+                    Log.v("TAG",personEmail );
+                }
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
-                signOut();
                 finish();
             }
             else {
+                //signOut();
                 signOut();
             }
         }
