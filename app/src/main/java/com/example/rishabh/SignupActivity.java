@@ -31,7 +31,6 @@ public class SignupActivity extends AppCompatActivity {
     DatabaseReference mDatabase = database.getReference();
 
     @BindView(R.id.input_name) EditText _nameText;
-    @BindView(R.id.input_address) EditText _addressText;
     @BindView(R.id.input_email) EditText _emailText;
     @BindView(R.id.input_mobile) EditText _mobileText;
     @BindView(R.id.input_password) EditText _passwordText;
@@ -81,7 +80,6 @@ public class SignupActivity extends AppCompatActivity {
         progressDialog.show();
 
         final String name = _nameText.getText().toString();
-        String address = _addressText.getText().toString();
         final String email = _emailText.getText().toString();
         final String mobile = _mobileText.getText().toString();
         final String password = _passwordText.getText().toString();
@@ -110,8 +108,11 @@ public class SignupActivity extends AppCompatActivity {
                             Log.v("LoginActivity", "Registered Data");*/
 
                             DatabaseReference myRef = mDatabase.child("users");
-                            myRef.setValue("User");
-                            DatabaseReference mUser = myRef.child(mobile);
+                            myRef.push().setValue("User");
+                            myRef = mDatabase.child("users");
+                            String new_email = email.replaceAll("\\.","_dot_");
+                            Log.v("TAG",new_email);
+                            DatabaseReference mUser = myRef.child(new_email);
                             Log.v("Log","Hoja1");
                             HashMap<String,String> user = new HashMap<String, String>();
                             user.put("Name",name);
@@ -140,7 +141,10 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
         finish();
+
     }
 
     public void onSignupFailed() {
@@ -153,7 +157,6 @@ public class SignupActivity extends AppCompatActivity {
         boolean valid = true;
 
         String name = _nameText.getText().toString();
-        String address = _addressText.getText().toString();
         String email = _emailText.getText().toString();
         String mobile = _mobileText.getText().toString();
         String password = _passwordText.getText().toString();
@@ -164,13 +167,6 @@ public class SignupActivity extends AppCompatActivity {
             valid = false;
         } else {
             _nameText.setError(null);
-        }
-
-        if (address.isEmpty()) {
-            _addressText.setError("Enter Valid Address");
-            valid = false;
-        } else {
-            _addressText.setError(null);
         }
 
 

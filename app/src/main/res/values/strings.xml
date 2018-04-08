@@ -1,7 +1,32 @@
 <resources>
-    <string name="app_name">Material Login Example</string>
+    <string name="app_name">VConnect</string>
     <string name="feed">NewFeed</string>
+    <string name="appName">VConnect</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="password_hint">Password</string>
+    <string name="email_hint">Email</string>
+    <string name="name_hint">Name</string>
+    <string name="mobile_hint">Mobile</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="header_name">Sign Up</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="post">My Post</string>
+    <string name="Log_in">Login</string>
+    <string name="repassword_hint">Re-enter Password</string>
+    <string name="action_settings">action_settings</string>
+    <string name="prof_email">E-mail</string>
+    <string name="prof_name">Name</string>
+    <string name="prof_mobile">Mobile</string>
+    <string name="prof_pass">Password</string>
+    <string name="prof_college">College</string>
+
+
+    <!-- Setting-->
+    <string name="profile">My Profile</string>
+    <string name="photos">My Photos</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

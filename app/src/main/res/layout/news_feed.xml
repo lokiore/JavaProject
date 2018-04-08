@@ -1,14 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin">
+    android:layout_height="match_parent">
 
-    <TextView android:text="@string/feed" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/header_imageview"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logo" />
+
+        <LinearLayout
+            android:id="@+id/informations_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/header_imageview"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingBottom="32dp"
+            android:paddingTop="32dp">
 
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/header_name"
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:gravity="center"
+                android:textColor="#FF707070" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="#FF909090" />
+
+        </LinearLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/informations_container"
+            android:background="#FFF0F0F0"
+            android:scrollbars="none"
+            android:id="@+id/horizontalScrollView">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <!-- Here are the tabs, Just TextViews with a selector and a clickListener... -->
+                <!-- There is also two views at each edge with a gradient drawable making the fade effect. But I find this pretty ugly. -->
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- cheat code: negative margin -->
+        <ImageView
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_above="@+id/informations_container"
+
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="-16dp"
+            android:src="@drawable/photo" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/horizontalScrollView"
+            android:layout_centerHorizontal="true"
+            android:text="Sign Out"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
 </LinearLayout>
