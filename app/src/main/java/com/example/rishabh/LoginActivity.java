@@ -175,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
         //hideProgressDialog();
         if (user != null) {
             Log.v("Log","Login");
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, HomeActivity.class);
             startActivity(intent);
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
@@ -253,6 +253,7 @@ public class LoginActivity extends AppCompatActivity {
             if (access) {
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
+                signOut();
                 finish();
             }
             else {
@@ -265,18 +266,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    /*protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
-        // Find the TextView that is inside of the SignInButton and set its text
-        for (int i = 0; i < signInButton.getChildCount(); i++) {
-            View v = signInButton.getChildAt(i);
-
-            if (v instanceof TextView) {
-                TextView tv = (TextView) v;
-                tv.setText(buttonText);
-                return;
-            }
-        }
-    }*/
 
     @Override
     public void onBackPressed() {

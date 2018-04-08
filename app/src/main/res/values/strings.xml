@@ -9,7 +9,8 @@
     <string name="mobile_hint">Mobile</string>
     <string name="sign_up">Sign Up</string>
     <string name="header_name">Sign Up</string>
-
+    <string name="sign_out">Sign Out</string>
+    <string name="post">My Post</string>
     <string name="Log_in">Login</string>
     <string name="repassword_hint">Re-enter Password</string>
     <string name="action_settings">action_settings</string>

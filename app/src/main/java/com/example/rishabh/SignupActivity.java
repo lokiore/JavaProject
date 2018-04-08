@@ -110,7 +110,9 @@ public class SignupActivity extends AppCompatActivity {
                             DatabaseReference myRef = mDatabase.child("users");
                             myRef.push().setValue("User");
                             myRef = mDatabase.child("users");
-                            DatabaseReference mUser = myRef.child(mobile);
+                            String new_email = email.replaceAll("\\.","_dot_");
+                            Log.v("TAG",new_email);
+                            DatabaseReference mUser = myRef.child(new_email);
                             Log.v("Log","Hoja1");
                             HashMap<String,String> user = new HashMap<String, String>();
                             user.put("Name",name);
