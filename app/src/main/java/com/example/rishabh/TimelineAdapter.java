@@ -20,7 +20,7 @@ import com.android.volley.toolbox.NetworkImageView;
 
 import java.util.ArrayList;
 
-import info.androidhive.listviewfeed.FeedImageView;
+//import info.androidhive.listviewfeed.FeedImageView;
 
 public class TimelineAdapter extends ArrayAdapter<Timeline> {
 

@@ -56,6 +56,15 @@
                 android:inputType="textPassword"/>
         </android.support.design.widget.TextInputLayout>
 
+        <TextView android:id="@+id/link_forgot_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:text="Forgot Password?"
+            android:layout_gravity="right"
+            android:textColor="@color/white"
+            android:textSize="16dip"/>
+
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/btn_login"
             android:layout_width="fill_parent"
