@@ -31,8 +31,7 @@ public class HomeActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
         TabLayout.Tab tabAdd = tabLayout.getTabAt(0);
         tabAdd.setCustomView(R.layout.tab_layout_custom_view);
-        tabAdd.setText("Add");
-        tabAdd.setIcon(R.drawable.ic_account_circle_black_24dp).setText("Add");
+        tabAdd.setIcon(R.drawable.ic_account_circle_black_24dp);
         TabLayout.Tab tabAdd1 = tabLayout.getTabAt(1);
         tabAdd1.setCustomView(R.layout.tab_layout_custom_view);
         tabAdd1.setText("Add");

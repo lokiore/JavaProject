@@ -4,7 +4,8 @@
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="200dp"
+        android:background="@color/black">
         <ImageView
             android:id="@+id/disp_profile_picture"
             android:layout_width="wrap_content"
@@ -16,95 +17,114 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:text="@string/prof_email" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center"
-            android:text="@string/prof_email" />
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/prof_email"
+            android:id="@+id/profile_email"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:text="@string/prof_name" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="@string/prof_email" />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/prof_email"
+            android:id="@+id/profile_name"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/mobile_layout">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:text="@string/prof_mobile" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="@string/prof_email" />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/prof_email"
+            android:id="@+id/profile_mobile"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/password_layout">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:text="@string/prof_pass" />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="@string/prof_email" />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/prof_email"
+            android:id="@+id/profile_pass"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
             android:text="@string/prof_college" />
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/profile_college"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="@string/prof_email" />
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="@string/prof_college_name" />
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:id="@+id/update_profile">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"

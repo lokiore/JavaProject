@@ -42,7 +42,7 @@ public class NewsFeedFragment extends Fragment {
         final ArrayList<Timeline> posts = new ArrayList<Timeline>();
         posts.add(new Timeline("lokesh","12:30 PM",R.drawable.common_google_signin_btn_icon_dark,"AAj Gand maregi"));
         posts.add(new Timeline("lokesh","12:30 PM",R.drawable.common_google_signin_btn_icon_dark,"AAj Gand nahi maregi"));
-
+        posts.add(new Timeline("lokesh","12:30 PM",R.drawable.common_google_signin_btn_icon_dark,R.drawable.photo,"AAj Gand maregi hi maregi"));
         TimelineAdapter postsAdapter = new TimelineAdapter(getActivity(),posts);
 
         ListView listView = rootView.findViewById(R.id.time_list);
