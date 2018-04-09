@@ -43,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(com.example.rishabh.R.id.input_password) EditText _passwordText;
     @BindView(com.example.rishabh.R.id.btn_login) Button _loginButton;
     @BindView(com.example.rishabh.R.id.link_signup) TextView _signupLink;
+    @BindView(R.id.link_forgot_password) TextView _forgotPasswordLink;
 
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -78,6 +79,14 @@ public class LoginActivity extends AppCompatActivity {
                 startActivityForResult(intent, REQUEST_SIGNUP);
                 finish();
                 overridePendingTransition(com.example.rishabh.R.anim.push_left_in, com.example.rishabh.R.anim.push_left_out);
+            }
+        });
+
+        _forgotPasswordLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
+                startActivity(intent);
             }
         });
         signInButton = (SignInButton) findViewById(R.id.sign_in_button);
@@ -176,9 +185,18 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         //hideProgressDialog();
         if (user != null) {
-            Log.v("Log","Login");
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            if(user.isEmailVerified()) {
+                Log.v("Log", "Login");
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Log.v("TAG","NOT VERIFIED");
+                Toast.makeText(LoginActivity.this, "Email not verified",
+                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
@@ -273,7 +291,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
         else {
-            Toast.makeText(this, "Sign in your account", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Sign in your account", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -281,7 +299,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        // Disable going back to the MainActivity
+        // Disable going back to the MainActivity1
         moveTaskToBack(true);
     }
 

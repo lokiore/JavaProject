@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
@@ -14,7 +15,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -36,12 +40,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
         ImageView imageView = findViewById(R.id.disp_profile_picture);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.photo);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.photo);
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         roundedBitmapDrawable.setCircular(true);
         imageView.setImageDrawable(roundedBitmapDrawable);
         final TextView email = findViewById(R.id.update_email);
@@ -61,7 +65,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 String personName = user.get("Name");
                 String personEmail = user.get("Email");
                 final String password = user.get("Password");
-                personEmail = personEmail.replaceAll("_dot_","\\.");
+                personEmail = personEmail.replaceAll("_dot_", "\\.");
+
                 String personMobile = user.get("Mobile");
                 name.setText(personName);
                 email.setText(personEmail);
@@ -76,22 +81,45 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         TextView tname = findViewById(R.id.update_name);
                         TextView tmobile = findViewById(R.id.update_mobile);
                         String email = temail.getText().toString();
-                        String new_email = email.replaceAll("\\.","_dot_");
+                        String new_email = email.replaceAll("\\.", "_dot_");
                         String mobile = tmobile.getText().toString();
                         String name = tname.getText().toString();
 
                         DatabaseReference myRef = mDatabase.child("users");
                         DatabaseReference mUser = myRef.child(new_email);
 
-                        HashMap<String,String> user = new HashMap<String, String>();
-                        user.put("Name",name);
-                        user.put("Email",email);
-                        user.put("Mobile",mobile);
-                        user.put("Password",password);
+                        HashMap<String, String> user = new HashMap<String, String>();
+                        user.put("Name", name);
+                        user.put("Email", email);
+                        user.put("Mobile", mobile);
+                        user.put("Password", password);
                         mUser.setValue(user);
-                        Intent intent = new Intent(UpdateProfileActivity.this,DispProfileActivity.class);
+                        Intent intent = new Intent(UpdateProfileActivity.this, DispProfileActivity.class);
                         startActivity(intent);
                         finish();
+                    }
+                });
+
+                LinearLayout change_pass = findViewById(R.id.change_pass);
+                change_pass.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Intent intent  = new Intent(UpdateProfileActivity.this,ChangePasswordActivity.class);
+                        //startActivity(intent);
+                        FirebaseAuth auth = FirebaseAuth.getInstance();
+                        String emailAddress = mAuth.getEmail();
+                        auth.sendPasswordResetEmail(emailAddress)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            Log.d("TAG", "Email sent.");
+                                            Toast.makeText(UpdateProfileActivity.this,"Password reset link to your EmailId ",Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                });
+                        //finish();
                     }
                 });
             }
@@ -104,5 +132,5 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
 
     }
-
 }
+

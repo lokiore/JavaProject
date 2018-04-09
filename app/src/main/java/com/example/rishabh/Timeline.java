@@ -1,48 +1,93 @@
 package com.example.rishabh;
 
 public class Timeline {
-
+    private int id;
+    private String name, status, timeStamp, url;
     private final int NO_IMAGE = -1;
-    private String Username;
-    private String Time;
-    private int ProfileImage;
-    private String Post;
-    private int PostImage=NO_IMAGE;
-
-    public Timeline(String username,String time,int profileImage,String post){
-        Username=username;
-        Time=time;
-        ProfileImage=profileImage;
-        Post=post;
-    }
-    public Timeline(String username,String time,int profileImage,int postImage,String post){
-        Username=username;
-        Time=time;
-        ProfileImage=profileImage;
-        Post=post;
-        PostImage=postImage;
+    private int image=NO_IMAGE, profilePic;
+    public Timeline() {
     }
 
-    public String getUsername() {
-        return Username;
+    public Timeline(int id, String name, int image, String status,
+                    int profilePic, String timeStamp, String url) {
+        super();
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.status = status;
+        this.profilePic = profilePic;
+        this.timeStamp = timeStamp;
+        this.url = url;
     }
 
-    public String getTime() {
-        return Time;
+    public Timeline(int id, String name, String status,
+                    int profilePic, String timeStamp, String url) {
+        super();
+        this.id = id;
+        this.name = name;
+        //this.image = image;
+        this.status = status;
+        this.profilePic = profilePic;
+        this.timeStamp = timeStamp;
+        this.url = url;
     }
 
-    public int getProfileImage() {
-        return ProfileImage;
+    public int getId() {
+        return id;
     }
 
-    public int getPostImage() {
-        return PostImage;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPost() {
-        return Post;
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getImge() {
+        return image;
+    }
+
+    public void setImge(int image) {
+        this.image = image;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public int getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(int profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public String getTimeStamp() {
+        return timeStamp;
+    }
+
+    public void setTimeStamp(String timeStamp) {
+        this.timeStamp = timeStamp;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
     public boolean hashPostImage(){
-        return PostImage!=NO_IMAGE;
+        return image!=NO_IMAGE;
     }
 }

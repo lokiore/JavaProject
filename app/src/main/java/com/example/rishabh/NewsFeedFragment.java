@@ -39,13 +39,14 @@ public class NewsFeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView=inflater.inflate(R.layout.time_list, container, false);
-        final ArrayList<Timeline> posts = new ArrayList<Timeline>();
-        posts.add(new Timeline("lokesh","12:30 PM",R.drawable.common_google_signin_btn_icon_dark,"AAj Gand maregi"));
-        posts.add(new Timeline("lokesh","12:30 PM",R.drawable.common_google_signin_btn_icon_dark,"AAj Gand nahi maregi"));
-        posts.add(new Timeline("lokesh","12:30 PM",R.drawable.common_google_signin_btn_icon_dark,R.drawable.photo,"AAj Gand maregi hi maregi"));
+        ArrayList<Timeline> posts = new ArrayList<Timeline>();
+        posts.add(new Timeline(1,"lokesh",R.drawable.photo,"Status",R.drawable.common_google_signin_btn_icon_dark,"12:2320","AAj Gand maregi"));
+        posts.add(new Timeline(2,"lokesh","Status",R.drawable.common_google_signin_btn_icon_dark,"ADF","AAj Gand maregi"));
+        posts.add(new Timeline(3,"lokesh","Status",R.drawable.common_google_signin_btn_icon_dark,"AFF","AAj Gand maregi"));
+
         TimelineAdapter postsAdapter = new TimelineAdapter(getActivity(),posts);
 
-        ListView listView = rootView.findViewById(R.id.time_list);
+        ListView listView = rootView.findViewById(R.id.list);
         listView.setAdapter(postsAdapter);
         return rootView;
     }
