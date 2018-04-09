@@ -165,6 +165,15 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        LinearLayout myPhotos = v.findViewById(R.id.layout_photo);
+        myPhotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MyPhotos.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 

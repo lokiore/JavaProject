@@ -113,7 +113,8 @@
                     android:gravity="center"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    tools:ignore="ExtraText">
+                    tools:ignore="ExtraText"
+                    android:id="@+id/layout_photo">
 
                     <ImageView
                         android:layout_width="wrap_content"
