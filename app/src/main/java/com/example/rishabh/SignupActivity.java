@@ -123,15 +123,15 @@ public class SignupActivity extends AppCompatActivity {
                             mUser.setValue(user);
                             Log.v("Log","Hoja");
                             FirebaseAuth auth = FirebaseAuth.getInstance();
-                            FirebaseUser muser = auth.getCurrentUser();
+                            final FirebaseUser muser = auth.getCurrentUser();
 
                             muser.sendEmailVerification()
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Log.d("TAG", "Email sent.");
-                                                Toast.makeText(SignupActivity.this, "Email Sent",
+                                                Log.d("TAG", "Verification Email sent.");
+                                                Toast.makeText(SignupActivity.this, "Verification link sent to"+muser.getEmail(),
                                                         Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -156,7 +156,7 @@ public class SignupActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         _signupButton.setEnabled(true);
         setResult(RESULT_OK, null);
-        Intent intent = new Intent(this,HomeActivity.class);
+        Intent intent = new Intent(this,LoginActivity.class);
         startActivity(intent);
         finish();
 

@@ -185,9 +185,18 @@ public class LoginActivity extends AppCompatActivity {
     private void updateUI(FirebaseUser user) {
         //hideProgressDialog();
         if (user != null) {
-            Log.v("Log","Login");
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
+            if(user.isEmailVerified()) {
+                Log.v("Log", "Login");
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+            }
+            else{
+                Log.v("TAG","NOT VERIFIED");
+                Toast.makeText(LoginActivity.this, "Email not verified",
+                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            }
         } else {
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
