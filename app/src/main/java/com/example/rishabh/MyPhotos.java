@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,12 +69,13 @@ public class MyPhotos extends AppCompatActivity {
         mButtonUpload = (Button) findViewById(R.id.button_upload);
         mImageView = (ImageView) findViewById(R.id.image_view);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-
+        final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
        // mImageView.setVisibility();
+        String new_email = mAuth.getEmail();
+        new_email = new_email.replaceAll("\\.", "_dot_");
+        mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("uploads");
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
-        mDatabase = FirebaseDatabase.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
 
         mGridView = (GridView) findViewById(R.id.gridView);

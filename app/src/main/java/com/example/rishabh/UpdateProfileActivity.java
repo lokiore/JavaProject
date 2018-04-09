@@ -16,6 +16,8 @@ import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -42,41 +44,50 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UpdateProfileActivity extends AppCompatActivity {
 
 
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference mDatabase = database.getReference();
-    ImageView mImageView = findViewById(R.id.disp_profile_picture);
+
+
+    private static final String TAG = MyPhotos.class.getSimpleName();
+
     public static final int PICK_IMAGE_REQUEST = 1;
-    private ProgressBar mProgressBar;
+
+
     private Uri mImageUri;
+
     private StorageReference mStorageRef;
-    //private FirebaseDatabase mDatabase;
+    private FirebaseDatabase mDatabase;
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
+    private ImageView imageView ;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_profile);
         final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        super.onCreate(savedInstanceState);
+       // FirebaseAuth mauth = FirebaseAuth.getInstance();
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
-        ImageView imageView = findViewById(R.id.disp_profile_picture);
+        String new_email = mAuth.getEmail();
+        new_email = new_email.replaceAll("\\.", "_dot_");
+        mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("profile");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("profile");
+        setContentView(R.layout.activity_update_profile);
+        imageView = findViewById(R.id.disp_profile_picture);
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.photo);
         RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
         roundedBitmapDrawable.setCircular(true);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference mDatabase = database.getReference();
         imageView.setImageDrawable(roundedBitmapDrawable);
         final TextView email = findViewById(R.id.update_email);
         final TextView name = findViewById(R.id.update_name);
         final TextView mobile = findViewById(R.id.update_mobile);
         final TextView college = findViewById(R.id.update_college);
-        String new_email = mAuth.getEmail();
-        new_email = new_email.replaceAll("\\.", "_dot_");
         DatabaseReference myRef = mDatabase.child("users");
         DatabaseReference mUser = myRef.child(new_email);
 
@@ -117,10 +128,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         user.put("Mobile", mobile);
                         user.put("Password", password);
                         mUser.setValue(user);
+                        uploadFile();
                         Intent intent = new Intent(UpdateProfileActivity.this, DispProfileActivity.class);
                         startActivity(intent);
                         finish();
                     }
+
                 });
 
                 LinearLayout change_pass = findViewById(R.id.change_pass);
@@ -145,6 +158,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         //finish();
                     }
                 });
+
+
             }
 
             @Override
@@ -152,9 +167,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
             }
         });
-
-        ImageView profilePicture = findViewById(R.id.disp_profile_picture);
-        profilePicture.setOnClickListener(new View.OnClickListener() {
+        ImageView imageView1 = findViewById(R.id.disp_profile_picture);
+        imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openFileChooser();
@@ -162,22 +176,15 @@ public class UpdateProfileActivity extends AppCompatActivity {
         });
 
 
-
-
     }
-
-    private void openFileChooser(){
-
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,PICK_IMAGE_REQUEST);
-        uploadFile();
-
+    private  String getFileExtention(Uri uri){
+        ContentResolver cR = getContentResolver();
+        MimeTypeMap mime = MimeTypeMap.getSingleton();
+        return mime.getExtensionFromMimeType(cR.getType(uri));
     }
-
 
     private void uploadFile(){
+//        Log.v("TAG",mImageUri.toString());
         if(mImageUri != null){
             StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()+"."+getFileExtention(mImageUri));
 
@@ -188,7 +195,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            mProgressBar.setProgress(0);
+                            //mProgressBar.setProgress(0);
                         }
                     },500);
                     Toast.makeText(UpdateProfileActivity.this,"Upload successful",Toast.LENGTH_LONG).show();
@@ -205,15 +212,26 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 @Override
                 public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                     double progress = (100.0*taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
-                    mProgressBar.setProgress((int) progress);
+                    //mProgressBar.setProgress((int) progress);
 
                 }
             });
 
+            //mImageUri = null;
 
         }else{
-            Toast.makeText(this,"No file selected",Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this,"No file selected",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void openFileChooser(){
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent,PICK_IMAGE_REQUEST);
+        //Log.v("TAG","IMAGE"+mImageUri.toString());
+
     }
 
     @Override
@@ -222,17 +240,12 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
             mImageUri = data.getData();
+            Log.v("TAG","IMAGE"+mImageUri.toString());
 
-            Picasso.get().load(mImageUri).into(mImageView);
+            Picasso.get().load(mImageUri).into(imageView);
+            Log.v("TAG","IMAGE"+mImageUri.toString());
+
         }
 
     }
-
-
-    private  String getFileExtention(Uri uri){
-        ContentResolver cR = getContentResolver();
-        MimeTypeMap mime = MimeTypeMap.getSingleton();
-        return mime.getExtensionFromMimeType(cR.getType(uri));
-    }
 }
-
