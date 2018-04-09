@@ -23,7 +23,6 @@
         <activity android:name="com.example.rishabh.DispProfileActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.UpdateProfileActivity" android:theme="@style/AppTheme.Dark" />
 
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
