@@ -7,7 +7,7 @@
     android:gravity="center"
     android:fadeScrollbars="true"
     android:layout_marginTop="10dp"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
 <LinearLayout
 
@@ -68,22 +68,27 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_parent_rounded_corner"
                 android:orientation="vertical">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:fadingEdge="vertical"
                     android:orientation="horizontal"
+                    android:background="@drawable/bg_parent_rounded_corner"
                     tools:ignore="ExtraText"
-                    android:id="@+id/my_profile">
+                    android:id="@+id/my_profile"
+                    android:clickable="true">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_account_circle_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -94,12 +99,13 @@
                         android:layout_height="60dp"
                         android:layout_weight="4"
                         android:gravity="center"
+                        android:textColor="@color/black"
                         android:text="@string/profile"
                         android:id="@+id/click_my_prof"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -109,16 +115,18 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="ExtraText"
-                    android:id="@+id/layout_photo">
+                    android:id="@+id/layout_photo"
+                    android:background="@drawable/bg_parent_rounded_corner"
+                    android:clickable="true">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_account_circle_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -127,13 +135,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="60dp"
+                        android:textColor="@color/black"
                         android:layout_weight="4"
                         android:gravity="center"
                         android:text="@string/photos" />
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -142,15 +151,17 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    tools:ignore="ExtraText">
+                    android:background="@drawable/bg_parent_rounded_corner"
+                    tools:ignore="ExtraText"
+                    android:clickable="true">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_account_circle_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -159,13 +170,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="60dp"
+                        android:textColor="@color/black"
                         android:layout_weight="4"
                         android:gravity="center"
                         android:text="@string/post" />
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -174,15 +186,17 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="horizontal"
-                    tools:ignore="ExtraText">
+                    android:background="@drawable/bg_parent_rounded_corner"
+                    tools:ignore="ExtraText"
+                    android:clickable="true">
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_account_circle_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
@@ -192,22 +206,60 @@
                         android:id="@+id/sign_out"
                         android:layout_width="wrap_content"
                         android:layout_height="60dp"
+                        android:textColor="@color/black"
                         android:layout_weight="4"
                         android:gravity="center"
                         android:text="@string/sign_out" />
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="60dp"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
                         android:layout_weight="1"
                         android:layout_gravity="center"
                         android:layout_marginRight="10dp"/>
 
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:fadingEdge="vertical"
+                    android:orientation="horizontal"
+                    android:background="@drawable/bg_parent_rounded_corner"
+                    tools:ignore="ExtraText"
+                    android:id="@+id/about"
+                    android:clickable="true">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_account_circle_black_24dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="60dp"
+                        android:layout_weight="4"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        android:text="About Us"
+                        android:id="@+id/about_click"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
+                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp"/>
+
             </LinearLayout>
 
-
+            </LinearLayout>
 
 </LinearLayout>
 </ScrollView>

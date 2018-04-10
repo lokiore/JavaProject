@@ -1,24 +1,31 @@
 package com.example.rishabh;
 
+import android.support.v7.app.AppCompatActivity;
+import android.widget.GridView;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
+
+import android.widget.AdapterView;
 import android.widget.Button;
+
 import android.widget.GridView;
+
 import android.widget.ImageView;
+
 import android.widget.ProgressBar;
+
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,8 +39,9 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class MyPhotos extends AppCompatActivity {
+public class MyPhotos extends AppCompatActivity implements GridViewAdapter.OnItemClickListener{
     private static final String TAG = MyPhotos.class.getSimpleName();
 
     public static final int PICK_IMAGE_REQUEST = 1;
@@ -69,13 +77,12 @@ public class MyPhotos extends AppCompatActivity {
         mButtonUpload = (Button) findViewById(R.id.button_upload);
         mImageView = (ImageView) findViewById(R.id.image_view);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
-       // mImageView.setVisibility();
-        String new_email = mAuth.getEmail();
-        new_email = new_email.replaceAll("\\.", "_dot_");
-        mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("uploads");
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("uploads");
 
+        // mImageView.setVisibility();
+
+        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        mDatabase = FirebaseDatabase.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
 
         mGridView = (GridView) findViewById(R.id.gridView);
@@ -92,6 +99,36 @@ public class MyPhotos extends AppCompatActivity {
         mImageView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);
 
+
+        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                //Get item at position
+                Upload item = (Upload) parent.getItemAtPosition(position);
+
+                Intent intent = new Intent(MyPhotos.this, DetailsActivity.class);
+                ImageView imageView = (ImageView) v.findViewById(R.id.grid_item_image);
+
+                // Interesting data to pass across are the thumbnail size/location, the
+                // resourceId of the source bitmap, the picture description, and the
+                // orientation (to avoid returning back to an obsolete configuration if
+                // the device rotates again in the meantime)
+
+                int[] screenLocation = new int[2];
+                imageView.getLocationOnScreen(screenLocation);
+
+                //Pass the image title and url to DetailsActivity
+                intent.putExtra("left", screenLocation[0]).
+                        putExtra("top", screenLocation[1]).
+                        putExtra("width", imageView.getWidth()).
+                        putExtra("height", imageView.getHeight()).
+                        putExtra("title", item.getName()).
+                        putExtra("image", item.getImageUrl());
+
+                //Start details activity
+                startActivity(intent);
+            }
+        });
+
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -103,6 +140,8 @@ public class MyPhotos extends AppCompatActivity {
                 mAdapter = new GridViewAdapter(MyPhotos.this,R.layout.image_item,mGridData);
 
                 mGridView.setAdapter(mAdapter);
+                mAdapter.setOnItemClickListener(MyPhotos.this);
+
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
 
@@ -134,10 +173,9 @@ public class MyPhotos extends AppCompatActivity {
             }
         });
 
-
-
-
     }
+
+
 
     private  String getFileExtention(Uri uri){
         ContentResolver cR = getContentResolver();
@@ -208,6 +246,21 @@ public class MyPhotos extends AppCompatActivity {
             Picasso.get().load(mImageUri).into(mImageView);
         }
 
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this, "Normal click at position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onWhatEverClick(int position) {
+        Toast.makeText(this, "Whatever click at position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        Toast.makeText(this, "Delete click at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
 }
