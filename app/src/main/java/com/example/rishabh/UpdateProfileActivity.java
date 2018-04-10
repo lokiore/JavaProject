@@ -77,13 +77,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("profile");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("profile");
         setContentView(R.layout.activity_update_profile);
-        imageView = findViewById(R.id.disp_profile_picture);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.photo);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-        roundedBitmapDrawable.setCircular(true);
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference mDatabase = database.getReference();
-        imageView.setImageDrawable(roundedBitmapDrawable);
         final TextView email = findViewById(R.id.update_email);
         final TextView name = findViewById(R.id.update_name);
         final TextView mobile = findViewById(R.id.update_mobile);
@@ -167,6 +163,32 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
             }
         });
+        final ImageView profile = findViewById(R.id.disp_profile_picture);
+        //personEmail=personEmail.replaceAll("\\.", "_dot_");
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference profRef = databaseReference.child("Photos").child(new_email).child("profile");
+        if(profRef!=null) {
+            profRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        Upload upload = postSnapshot.getValue(Upload.class);
+                        Picasso.get().load(upload.getImageUrl()).into(profile);
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+        }
+        else {
+            Log.v("TAG","YAHOO");
+            ImageView profilee = findViewById(R.id.disp_profile_picture);
+            profilee.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
+        }
         ImageView imageView1 = findViewById(R.id.disp_profile_picture);
         imageView1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +196,11 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 openFileChooser();
             }
         });
-
+        imageView = findViewById(R.id.disp_profile_picture);
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.photo);
+        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
+        roundedBitmapDrawable.setCircular(true);
+        imageView.setImageDrawable(roundedBitmapDrawable);
 
     }
     private  String getFileExtention(Uri uri){
