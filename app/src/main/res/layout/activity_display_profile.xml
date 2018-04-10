@@ -1,26 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/options"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:fadeScrollbars="true"
+    android:layout_marginTop="10dp"
+    android:layout_height="match_parent">
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@color/black">
+        android:layout_height="250dp">
+
+        <ImageView
+            android:id="@+id/cover_picture"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:adjustViewBounds="true"
+            android:background="@color/black"
+            android:scaleType="centerCrop" />
+
         <ImageView
             android:id="@+id/disp_profile_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:layout_marginTop="20dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
             android:src="@drawable/photo" />
-    </LinearLayout>
+
+
+
+    </RelativeLayout>
     <LinearLayout
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_parent_rounded_corner"
         android:layout_weight="1">
         <TextView
@@ -43,7 +73,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/bg_parent_rounded_corner"
         android:layout_weight="1">
         <TextView
@@ -66,9 +97,10 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="60dp"
         android:background="@drawable/bg_parent_rounded_corner"
         android:layout_weight="1"
+        android:layout_marginTop="10dp"
         android:id="@+id/mobile_layout">
         <TextView
             android:layout_width="0dp"
@@ -88,9 +120,38 @@
             android:text="@string/prof_email"
             android:id="@+id/profile_mobile"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_parent_rounded_corner">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="@string/prof_college"
+                android:textColor="@color/black" />
+
+            <TextView
+                android:id="@+id/profile_college"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:text="@string/prof_college_name"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+        android:layout_height="60dp"
+            android:layout_marginTop="10dp"
         android:layout_weight="1"
         android:background="@drawable/bg_parent_rounded_corner"
         android:id="@+id/password_layout">
@@ -112,43 +173,17 @@
             android:text="@string/prof_email"
             android:id="@+id/profile_pass"/>
     </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:gravity="center_vertical"
-            android:paddingLeft="20dp"
-            android:text="@string/prof_college" />
-        <TextView
-            android:id="@+id/profile_college"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:text="@string/prof_college_name" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:background="@drawable/bg_parent_rounded_corner"
-        android:id="@+id/update_profile">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="4"
-            android:textColor="@color/black"
-            android:gravity="center"
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/update_profile"
             android:text="Update Profile"
-            android:background="@color/iron"/>
-    </LinearLayout>
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:background="@color/primary_darker"
+            />
+
     </LinearLayout>
 </LinearLayout>
+</ScrollView>

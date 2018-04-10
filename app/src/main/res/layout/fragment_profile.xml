@@ -13,6 +13,8 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     >
@@ -25,7 +27,7 @@
             android:layout_height="250dp">
 
             <ImageView
-                android:id="@+id/header_imageview"
+                android:id="@+id/cover_picture"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:layout_alignParentLeft="true"
@@ -78,6 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:fadingEdge="vertical"
                     android:orientation="horizontal"
@@ -117,6 +120,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     tools:ignore="ExtraText"
@@ -153,6 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
+                    android:layout_marginTop="10dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:background="@drawable/bg_parent_rounded_corner"
@@ -189,6 +194,7 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal"
                     android:background="@drawable/bg_parent_rounded_corner"
                     tools:ignore="ExtraText"
@@ -229,6 +235,7 @@
                     android:orientation="horizontal"
                     android:background="@drawable/bg_parent_rounded_corner"
                     tools:ignore="ExtraText"
+                    android:layout_marginTop="10dp"
                     android:id="@+id/about"
                     android:clickable="true">
 

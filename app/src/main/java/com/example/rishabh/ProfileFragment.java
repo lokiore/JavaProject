@@ -77,10 +77,11 @@ public class ProfileFragment extends Fragment {
         final View v =  inflater.inflate(R.layout.fragment_profile, container, false);
 
         ImageView imageView = v.findViewById(R.id.profile_picture);
-        TextView username = v.findViewById(R.id.username);
+        final TextView username = v.findViewById(R.id.username);
         TextView email = v.findViewById(R.id.email);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+         Uri mImageUri;
         if (acct != null)
         {
             String personName = acct.getDisplayName();
@@ -128,9 +129,14 @@ public class ProfileFragment extends Fragment {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
-                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                Upload upload = postSnapshot.getValue(Upload.class);
+                            //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            if(dataSnapshot.getValue()!=null) {
+                                Upload upload = dataSnapshot.getValue(Upload.class);
                                 Picasso.get().load(upload.getImageUrl()).into(profile);
+                                //mImageUri = Uri.parse(upload.getImageUrl());
+                            }
+                            else{
+                                profile.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
                             }
                         }
 
@@ -197,6 +203,27 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),MyPhotos.class);
+                startActivity(intent);
+            }
+        });
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),DetailsActivity.class);
+                ImageView imageView1 = v.findViewById(R.id.profile_picture);
+                int[] screenLocation = new int[2];
+                imageView1.getLocationOnScreen(screenLocation);
+
+                //Pass the image title and url to DetailsActivity
+                intent.putExtra("left", screenLocation[0]).
+                        putExtra("top", screenLocation[1]).
+                        putExtra("width", imageView1.getWidth()).
+                        putExtra("height", imageView1.getHeight()).
+                        putExtra("title", username.getText()).
+                        putExtra("image", "Profile Picture");
+
+                //Start details activity
                 startActivity(intent);
             }
         });
