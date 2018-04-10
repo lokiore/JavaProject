@@ -1,15 +1,18 @@
 package com.example.rishabh;
 
+import android.net.Uri;
+
 public class Timeline {
     private int id;
     private String name, status, timeStamp, url;
     private final int NO_IMAGE = -1;
-    private int image=NO_IMAGE, profilePic;
+    private Uri image = null;
+    private Uri         profilePic;
     public Timeline() {
     }
 
-    public Timeline(int id, String name, int image, String status,
-                    int profilePic, String timeStamp, String url) {
+    public Timeline(int id, String name, Uri image, String status,
+                    Uri profilePic, String timeStamp, String url) {
         super();
         this.id = id;
         this.name = name;
@@ -21,7 +24,7 @@ public class Timeline {
     }
 
     public Timeline(int id, String name, String status,
-                    int profilePic, String timeStamp, String url) {
+                    Uri profilePic, String timeStamp, String url) {
         super();
         this.id = id;
         this.name = name;
@@ -48,11 +51,11 @@ public class Timeline {
         this.name = name;
     }
 
-    public int getImge() {
+    public Uri getImge() {
         return image;
     }
 
-    public void setImge(int image) {
+    public void setImge(Uri image) {
         this.image = image;
     }
 
@@ -64,11 +67,11 @@ public class Timeline {
         this.status = status;
     }
 
-    public int getProfilePic() {
+    public Uri getProfilePic() {
         return profilePic;
     }
 
-    public void setProfilePic(int profilePic) {
+    public void setProfilePic(Uri profilePic) {
         this.profilePic = profilePic;
     }
 
@@ -88,6 +91,6 @@ public class Timeline {
         this.url = url;
     }
     public boolean hashPostImage(){
-        return image!=NO_IMAGE;
+        return image!=null;
     }
 }

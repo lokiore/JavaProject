@@ -6,6 +6,7 @@ package com.example.rishabh;
 
 
 import android.app.Activity;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -17,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.NetworkImageView;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -40,7 +42,10 @@ public class TimelineAdapter extends ArrayAdapter<Timeline> {
         Timeline timeline = getItem(position);
 
         ImageView timelineProfilePhoto = listViewItem.findViewById(R.id.timeline_profile_photo);
-        timelineProfilePhoto.setImageResource(timeline.getProfilePic());
+        //timelineProfilePhoto.setImageResource(timeline.getProfilePic());
+        Uri profUri = timeline.getProfilePic();
+        Picasso.get().load(profUri).into(timelineProfilePhoto);
+
 
         TextView timelineUsername = listViewItem.findViewById(R.id.post_username);
         timelineUsername.setText(timeline.getName());
@@ -57,7 +62,10 @@ public class TimelineAdapter extends ArrayAdapter<Timeline> {
         ImageView timelinePostImage = listViewItem.findViewById(R.id.timeline_post_photo);
 
         if (timeline.hashPostImage()) {
-            timelinePostImage.setImageResource(timeline.getImge());
+            //timelinePostImage.setImageResource(timeline.getImge());
+            Uri uri = timeline.getImge();
+            Picasso.get().load(uri).into(timelinePostImage);
+
             timelinePostImage.setVisibility(View.VISIBLE);
         } else {
             timelinePostImage.setVisibility(View.GONE);
