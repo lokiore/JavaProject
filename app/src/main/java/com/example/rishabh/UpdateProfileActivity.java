@@ -69,14 +69,14 @@ public class UpdateProfileActivity extends AppCompatActivity {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_update_profile);
         final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
-       // FirebaseAuth mauth = FirebaseAuth.getInstance();
+        // FirebaseAuth mauth = FirebaseAuth.getInstance();
 
         String new_email = mAuth.getEmail();
         new_email = new_email.replaceAll("\\.", "_dot_");
         mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("profile");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("profile");
-        setContentView(R.layout.activity_update_profile);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference mDatabase = database.getReference();

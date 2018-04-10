@@ -228,6 +228,14 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        v.findViewById(R.id.myPost).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MyPost.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 

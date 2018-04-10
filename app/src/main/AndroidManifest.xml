@@ -23,6 +23,8 @@
         <activity android:name="com.example.rishabh.UpdateProfileActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.ForgotPasswordActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.DetailsActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="com.example.rishabh.NewPostActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="com.example.rishabh.MyPost" android:theme="@style/AppTheme.Dark" />
 
         <activity android:name="com.example.rishabh.MyPhotos" android:theme="@style/AppTheme.Dark" />
         <meta-data

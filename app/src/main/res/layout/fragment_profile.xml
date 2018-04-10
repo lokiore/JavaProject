@@ -162,6 +162,7 @@
                     android:orientation="horizontal"
                     android:background="@drawable/bg_parent_rounded_corner"
                     tools:ignore="ExtraText"
+                    android:id="@+id/myPost"
                     android:clickable="true">
 
                     <ImageView
