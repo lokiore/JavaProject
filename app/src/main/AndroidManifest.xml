@@ -18,12 +18,13 @@
         </activity>
         <activity android:name="com.example.rishabh.LoginActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.SignupActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="com.example.rishabh.NewsFeed" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.HomeActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.DispProfileActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.UpdateProfileActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.ForgotPasswordActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="com.example.rishabh.DetailsActivity" android:theme="@style/AppTheme.Dark" />
 
+        <activity android:name="com.example.rishabh.MyPhotos" android:theme="@style/AppTheme.Dark" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

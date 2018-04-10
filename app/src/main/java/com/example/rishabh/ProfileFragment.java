@@ -32,6 +32,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 
@@ -118,6 +119,32 @@ public class ProfileFragment extends Fragment {
 
                     }
                 });
+                final ImageView profile = v.findViewById(R.id.profile_picture);
+                //personEmail=personEmail.replaceAll("\\.", "_dot_");
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                DatabaseReference profRef = databaseReference.child("Photos").child(new_email).child("profile");
+                if(profRef!=null) {
+                    profRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
+                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                Upload upload = postSnapshot.getValue(Upload.class);
+                                Picasso.get().load(upload.getImageUrl()).into(profile);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else {
+                    Log.v("TAG","YAHOO");
+                    ImageView profilee = v.findViewById(R.id.profile_picture);
+                    profilee.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
+                }
             }
             else
             {
@@ -161,6 +188,15 @@ public class ProfileFragment extends Fragment {
                             });
                 }
                 Intent intent = new Intent(getActivity(),LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout myPhotos = v.findViewById(R.id.layout_photo);
+        myPhotos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),MyPhotos.class);
                 startActivity(intent);
             }
         });

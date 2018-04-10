@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import java.lang.Exception;
 
 import android.content.Intent;
 import android.view.View;
@@ -27,6 +28,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
@@ -150,9 +153,29 @@ public class LoginActivity extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Inavlid Email/Password Combination",
-                                    Toast.LENGTH_SHORT).show();
+                            try{
+                                throw task.getException();
+                            }catch (FirebaseAuthInvalidUserException invalidEmail)
+                            {
+                                Log.d(TAG, "onComplete: invalid_email");
+                                Toast.makeText(LoginActivity.this,"Email Not Registered",Toast.LENGTH_SHORT).show();
+
+                            }
+                            catch (FirebaseAuthInvalidCredentialsException wrongPassword)
+                            {
+                                Log.d(TAG, "onComplete: wrong_password");
+                                Toast.makeText(LoginActivity.this, "Invalid Password",
+                                        Toast.LENGTH_SHORT).show();
+
+                            }
+                            catch (Exception e)
+                            {
+                                Log.d(TAG, "onComplete: " + e.getMessage());
+                                Toast.makeText(LoginActivity.this, "Login Failed",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                             updateUI(null);
+
                         }
 
                         // ...
