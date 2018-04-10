@@ -14,6 +14,7 @@ import android.text.method.PasswordTransformationMethod;
 import android.text.style.UpdateAppearance;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -89,7 +90,7 @@ public class DispProfileActivity extends AppCompatActivity {
                         mobile.setText(personMobile);
                         personPassword = personPassword.replaceAll(".","*");
                         password.setText(personPassword);
-                        LinearLayout updateView = findViewById(R.id.update_profile);
+                        Button updateView = findViewById(R.id.update_profile);
                         updateView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -114,10 +115,15 @@ public class DispProfileActivity extends AppCompatActivity {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
-                            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                Upload upload = postSnapshot.getValue(Upload.class);
+                            //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                            if(dataSnapshot.getValue()!=null) {
+                                Upload upload = dataSnapshot.getValue(Upload.class);
                                 Picasso.get().load(upload.getImageUrl()).into(profile);
                             }
+                            else{
+                                profile.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
+                            }
+
                         }
 
                         @Override
@@ -136,11 +142,11 @@ public class DispProfileActivity extends AppCompatActivity {
 
 
 
-        ImageView imageView = findViewById(R.id.disp_profile_picture);
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.photo);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
-        roundedBitmapDrawable.setCircular(true);
-        imageView.setImageDrawable(roundedBitmapDrawable);
+        //ImageView imageView = findViewById(R.id.disp_profile_picture);
+        //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.photo);
+        //RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
+        //roundedBitmapDrawable.setCircular(true);
+        //imageView.setImageDrawable(roundedBitmapDrawable);
     }
 
 

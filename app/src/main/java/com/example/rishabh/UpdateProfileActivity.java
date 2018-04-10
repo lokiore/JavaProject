@@ -68,8 +68,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
-        final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
         super.onCreate(savedInstanceState);
+        final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
        // FirebaseAuth mauth = FirebaseAuth.getInstance();
 
         String new_email = mAuth.getEmail();
@@ -172,10 +172,16 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
-                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        Upload upload = postSnapshot.getValue(Upload.class);
+                    //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    if(dataSnapshot.getValue()!=null) {
+                        Upload upload = dataSnapshot.getValue(Upload.class);
                         Picasso.get().load(upload.getImageUrl()).into(profile);
+                        //mImageUri = Uri.parse(upload.getImageUrl());
                     }
+                    else{
+                        profile.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
+                    }
+
                 }
 
                 @Override
@@ -226,8 +232,8 @@ public class UpdateProfileActivity extends AppCompatActivity {
                     },500);
                     Toast.makeText(UpdateProfileActivity.this,"Upload successful",Toast.LENGTH_LONG).show();
                     Upload upload = new Upload("Pic",taskSnapshot.getDownloadUrl().toString());
-                    String uploadId = mDatabaseRef.push().getKey();
-                    mDatabaseRef.child(uploadId).setValue(upload);
+                    //String uploadId = mDatabaseRef.getKey();
+                    mDatabaseRef.setValue(upload);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
