@@ -47,25 +47,9 @@ public class OtherUserPosts extends AppCompatActivity {
         setContentView(R.layout.other_user_post);
 
 
-        FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        String personEmail;
-        if(acct!=null){
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-            pName=personName;
-            pProfile=personPhoto;
-            pEmail=personEmail;
-
-        }
-        else{
-            if(mAuth!=null) {
-                String new_email = mAuth.getEmail();
-                new_email = new_email.replaceAll("\\.", "_dot_");
+                Intent intent=getIntent();
+                String new_email = intent.getStringExtra("Email");
+                //new_email = new_email.replaceAll("\\.", "_dot_");
                 pEmail=new_email;
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference mDatabase = database.getReference();
@@ -119,19 +103,19 @@ public class OtherUserPosts extends AppCompatActivity {
                 else {
                     Log.v("TAG","YAHOO");
                 }
-            }
-        }
 
 
 
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
         Log.v("TAA",pEmail);
         pEmail=pEmail.replaceAll("\\.","_dot_");
         Log.v("TAA","LLKLKLKLJ");
         Log.v("TAA",pEmail+"ll");
         Log.v("TAA","LOLOLO");
-        DatabaseReference profRef = databaseReference.child("Posts").child(pEmail);
+        profRef = databaseReference.child("Posts").child(pEmail);
         if(profRef!=null) {
             profRef.addValueEventListener(new ValueEventListener() {
                 @Override

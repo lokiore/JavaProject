@@ -26,7 +26,8 @@
         <activity android:name="com.example.rishabh.NewPostActivity" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.MyPost" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.OtherUserMainProfile" android:theme="@style/AppTheme.Dark" />
-
+        <activity android:name="com.example.rishabh.OtherUserMyProfile" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="com.example.rishabh.OtherUserPosts" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.MyPhotos" android:theme="@style/AppTheme.Dark" />
         <meta-data
             android:name="preloaded_fonts"

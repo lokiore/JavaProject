@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +44,24 @@ public class OtherUserMainProfile extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        findViewById(R.id.other_my_profile).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(OtherUserMainProfile.this,OtherUserMyProfile.class);
+                intent1.putExtra("Email",pEmail);
+                startActivity(intent1);
+            }
+        });
+
+        findViewById(R.id.other_myPost).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(OtherUserMainProfile.this,OtherUserPosts.class);
+                intent1.putExtra("Email",pEmail);
+                startActivity(intent1);
             }
         });
 

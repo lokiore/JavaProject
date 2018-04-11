@@ -29,7 +29,7 @@
                 android:scaleType="centerCrop" />
 
             <ImageView
-                android:id="@+id/disp_profile_picture"
+                android:id="@+id/other_disp_profile_picture"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_alignParentTop="true"
@@ -70,7 +70,7 @@
                     android:textColor="@color/black"
                     android:paddingLeft="20dp"
                     android:text="@string/prof_email"
-                    android:id="@+id/profile_email"/>
+                    android:id="@+id/other_profile_email"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -94,7 +94,7 @@
                     android:textColor="@color/black"
                     android:paddingLeft="20dp"
                     android:text="@string/prof_email"
-                    android:id="@+id/profile_name"/>
+                    android:id="@+id/other_profile_name"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                 android:background="@drawable/bg_parent_rounded_corner"
                 android:layout_weight="1"
                 android:layout_marginTop="10dp"
-                android:id="@+id/mobile_layout">
+                android:id="@+id/other_mobile_layout">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -119,7 +119,7 @@
                     android:paddingLeft="20dp"
                     android:textColor="@color/black"
                     android:text="@string/prof_email"
-                    android:id="@+id/profile_mobile"/>
+                    android:id="@+id/other_profile_mobile"/>
             </LinearLayout>
 
             <LinearLayout
@@ -148,33 +148,6 @@
                     android:text="@string/prof_college_name"
                     android:textColor="@color/black" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/bg_parent_rounded_corner"
-                android:id="@+id/password_layout">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:textColor="@color/black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="20dp"
-                    android:text="@string/prof_pass" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:gravity="center"
-                    android:paddingLeft="20dp"
-                    android:textColor="@color/black"
-                    android:text="@string/prof_email"
-                    android:id="@+id/profile_pass"/>
-            </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

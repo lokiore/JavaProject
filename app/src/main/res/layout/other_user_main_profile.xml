@@ -81,7 +81,7 @@
                 android:fadingEdge="vertical"
                 android:orientation="horizontal"
                 android:clickable="true"
-                android:id="@+id/my_profile">
+                android:id="@+id/other_my_profile">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -98,7 +98,7 @@
                     android:gravity="center"
                     android:textColor="@color/black"
                     android:text="User Details"
-                    android:id="@+id/click_my_prof"/>
+                    android:id="@+id/click_other_prof"/>
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -156,7 +156,7 @@
                 android:orientation="horizontal"
                 android:background="@drawable/bg_parent_rounded_corner"
                 tools:ignore="ExtraText"
-                android:id="@+id/myPost"
+                android:id="@+id/other_myPost"
                 android:clickable="true">
 
                 <ImageView

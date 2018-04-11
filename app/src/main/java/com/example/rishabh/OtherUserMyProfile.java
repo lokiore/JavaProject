@@ -41,33 +41,11 @@ public class OtherUserMyProfile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.other_user_my_profile);
 
-        FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
-        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-        final ImageView profile = findViewById(R.id.disp_profile_picture);
-        if(acct!=null){
-            String personName = acct.getDisplayName();
-            String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
-            Uri personPhoto = acct.getPhotoUrl();
-            TextView emailView = findViewById(R.id.profile_email);
-            emailView.setText(personEmail);
-            TextView nameView = findViewById(R.id.profile_name);
-            nameView.setText(personGivenName);
-            LinearLayout mobileView = findViewById(R.id.mobile_layout);
-            mobileView.setVisibility(View.GONE);
-            LinearLayout passwordView = findViewById(R.id.password_layout);
-            passwordView.setVisibility(View.GONE);
-            LinearLayout updateView = findViewById(R.id.update_profile);
-            updateView.setVisibility(View.GONE);
+        final ImageView profile = findViewById(R.id.other_disp_profile_picture);
 
-            Picasso.get().load(personPhoto).into(profile);
-        }
-        else{
-            if(mAuth!=null) {
-                String new_email = mAuth.getEmail();
-                new_email = new_email.replaceAll("\\.", "_dot_");
+                Intent intent = getIntent();
+                String new_email = intent.getStringExtra("Email");
+                //new_email = new_email.replaceAll("\\.", "_dot_");
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference mDatabase = database.getReference();
                 DatabaseReference myRef = mDatabase.child("users");
@@ -81,25 +59,17 @@ public class OtherUserMyProfile extends AppCompatActivity {
                         String personEmail = user.get("Email");
                         String personMobile = user.get("Mobile");
                         String personPassword = user.get("Password");
-                        TextView username = findViewById(R.id.profile_name);
-                        TextView email = findViewById(R.id.profile_email);
-                        TextView mobile = findViewById(R.id.profile_mobile);
-                        TextView password = findViewById(R.id.profile_pass);
+                        TextView username = findViewById(R.id.other_profile_name);
+                        TextView email = findViewById(R.id.other_profile_email);
+                        TextView mobile = findViewById(R.id.other_profile_mobile);
+                        //TextView password = findViewById(R.id.profile_pass);
 
                         username.setText(personName);
                         email.setText(personEmail);
                         mobile.setText(personMobile);
-                        personPassword = personPassword.replaceAll(".","*");
-                        password.setText(personPassword);
-                        Button updateView = findViewById(R.id.update_profile);
-                        updateView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(OtherUserMyProfile.this, UpdateProfileActivity.class);
-                                startActivity(intent);
+                        //personPassword = personPassword.replaceAll(".","*");
+                        //password.setText(personPassword);
 
-                            }
-                        });
                     }
 
                     @Override
@@ -135,7 +105,7 @@ public class OtherUserMyProfile extends AppCompatActivity {
                 }
                 else {
                     Log.v("TAG","YAHOO");
-                    ImageView profile2 = findViewById(R.id.disp_profile_picture);
+                    ImageView profile2 = findViewById(R.id.other_disp_profile_picture);
                     profile2.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
                 }
             }
@@ -143,11 +113,3 @@ public class OtherUserMyProfile extends AppCompatActivity {
 
 
 
-            //ImageView imageView = findViewById(R.id.disp_profile_picture);
-            //Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.photo);
-            //RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
-            //roundedBitmapDrawable.setCircular(true);
-            //imageView.setImageDrawable(roundedBitmapDrawable);
-        }
-
-}
