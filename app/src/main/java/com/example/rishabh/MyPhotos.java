@@ -26,6 +26,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -79,10 +81,14 @@ public class MyPhotos extends AppCompatActivity implements GridViewAdapter.OnIte
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
 
         // mImageView.setVisibility();
+        final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        // FirebaseAuth mauth = FirebaseAuth.getInstance();
 
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        String new_email = mAuth.getEmail();
+        new_email = new_email.replaceAll("\\.", "_dot_");
+        mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("uploads");
         mDatabase = FirebaseDatabase.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("uploads");
 
 
         mGridView = (GridView) findViewById(R.id.gridView);
@@ -94,7 +100,7 @@ public class MyPhotos extends AppCompatActivity implements GridViewAdapter.OnIte
 
         mProgressCircle = findViewById(R.id.progressCircle);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+       // mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
         mImageView.setVisibility(View.GONE);
         mProgressBar.setVisibility(View.GONE);

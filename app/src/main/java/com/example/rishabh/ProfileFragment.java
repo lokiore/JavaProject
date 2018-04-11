@@ -76,13 +76,11 @@ public class ProfileFragment extends Fragment {
 
         final View v =  inflater.inflate(R.layout.fragment_profile, container, false);
 
-        ImageView imageView = v.findViewById(R.id.profile_picture);
         final TextView username = v.findViewById(R.id.username);
         TextView email = v.findViewById(R.id.email);
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
-         Uri mImageUri;
-        final ImageView profile = v.findViewById(R.id.profile_picture);
+        Uri mImageUri;
         if (acct != null)
         {
             String personName = acct.getDisplayName();
@@ -92,6 +90,7 @@ public class ProfileFragment extends Fragment {
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
             username.setText(personName);
+            ImageView profile = v.findViewById(R.id.profile_picture);
             email.setText(personEmail);
             Picasso.get().load(personPhoto).into(profile);
         }
@@ -127,6 +126,7 @@ public class ProfileFragment extends Fragment {
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference profRef = databaseReference.child("Photos").child(new_email).child("profile");
                 if(profRef!=null) {
+                    final ImageView profile = v.findViewById(R.id.profile_picture);
                     profRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
@@ -169,10 +169,6 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.drawable.photo);
-        RoundedBitmapDrawable roundedBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(),bitmap);
-        roundedBitmapDrawable.setCircular(true);
-        imageView.setImageDrawable(roundedBitmapDrawable);
 
         TextView signoutView = v.findViewById(R.id.sign_out);
         signoutView.setOnClickListener(new View.OnClickListener() {
@@ -208,6 +204,7 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        ImageView imageView = v.findViewById(R.id.profile_picture);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

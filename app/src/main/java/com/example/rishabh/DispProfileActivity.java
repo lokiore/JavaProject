@@ -61,7 +61,7 @@ public class DispProfileActivity extends AppCompatActivity {
             mobileView.setVisibility(View.GONE);
             LinearLayout passwordView = findViewById(R.id.password_layout);
             passwordView.setVisibility(View.GONE);
-            LinearLayout updateView = findViewById(R.id.update_profile);
+            Button updateView = findViewById(R.id.update_profile);
             updateView.setVisibility(View.GONE);
 
             Picasso.get().load(personPhoto).into(profile);

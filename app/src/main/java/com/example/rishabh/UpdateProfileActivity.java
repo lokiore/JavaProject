@@ -231,7 +231,9 @@ public class UpdateProfileActivity extends AppCompatActivity {
                         }
                     },500);
                     Toast.makeText(UpdateProfileActivity.this,"Upload successful",Toast.LENGTH_LONG).show();
-                    Upload upload = new Upload("Pic",taskSnapshot.getDownloadUrl().toString());
+                    TextView tname = findViewById(R.id.update_name);
+                    String name = tname.getText().toString();
+                    Upload upload = new Upload(name,taskSnapshot.getDownloadUrl().toString());
                     //String uploadId = mDatabaseRef.getKey();
                     mDatabaseRef.setValue(upload);
                 }
