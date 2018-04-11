@@ -3,6 +3,8 @@ package com.example.rishabh;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -46,12 +49,12 @@ public class MyPost extends AppCompatActivity {
 
         FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-
+        String personEmail;
         if(acct!=null){
             String personName = acct.getDisplayName();
             String personGivenName = acct.getGivenName();
             String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
+            personEmail = acct.getEmail();
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
             pName=personName;
@@ -124,43 +127,54 @@ public class MyPost extends AppCompatActivity {
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
         Log.v("TAA",pEmail);
-        //pEmail=pEmail.replaceAll("\\.","_dot_");
+        pEmail=pEmail.replaceAll("\\.","_dot_");
         Log.v("TAA","LLKLKLKLJ");
         Log.v("TAA",pEmail+"ll");
         Log.v("TAA","LOLOLO");
-        posts.clear();
         DatabaseReference profRef = databaseReference.child("Posts").child(pEmail);
-        profRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Upload upload = postSnapshot.getValue(Upload.class);
-                    //Log.v("TAA",postSnapshot.getKey());
-                    //Log.v("TAA",dataSnapshot.getKey());
-                    pImage=Uri.parse(upload.getImageUrl());
-                    pDesc=upload.getName();
-                    pTime=postSnapshot.getKey();
-                    posts.add(new Timeline(1,pName,pImage,pDesc,pProfile,pTime,"lk"));
-                    //Picasso.get().load(upload.getImageUrl()).into(profile);
+        if(profRef!=null) {
+            profRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
+                    posts.clear();
+                    for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                        Upload upload = postSnapshot.getValue(Upload.class);
+                        //Log.v("TAA",postSnapshot.getKey());
+                        //Log.v("TAA",dataSnapshot.getKey());
+                        pImage = Uri.parse(upload.getImageUrl());
+                        pDesc = upload.getName();
+                        pTime = postSnapshot.getKey();
+                        if(pImage.equals("")) {
+                            posts.add(new Timeline(1, pName, pDesc, pProfile, pTime, "lk"));
+                        }
+                        else {
+                            posts.add(new Timeline(1, pName, pImage, pDesc, pProfile, pTime, "lk"));
+                        }
+                        //Picasso.get().load(upload.getImageUrl()).into(profile);
+                    }
+
+                    TimelineAdapter postsAdapter = new TimelineAdapter(MyPost.this, posts);
+
+                    ListView listView = findViewById(R.id.list_view);
+                    listView.setAdapter(postsAdapter);
+
+
                 }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
+                }
+            });
+        }
+        else{
+            Toast.makeText(MyPost.this,"Make Your First Post",Toast.LENGTH_LONG).show();
+        }
 
 
 
-        TimelineAdapter postsAdapter = new TimelineAdapter(this,posts);
 
-        ListView listView = findViewById(R.id.list_view);
-        listView.setAdapter(postsAdapter);
 
 
         findViewById(R.id.new_post).setOnClickListener(new View.OnClickListener() {
@@ -173,4 +187,6 @@ public class MyPost extends AppCompatActivity {
         });
 
     }
+
+
 }

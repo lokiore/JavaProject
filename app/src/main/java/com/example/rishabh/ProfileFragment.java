@@ -82,6 +82,7 @@ public class ProfileFragment extends Fragment {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
          Uri mImageUri;
+        final ImageView profile = v.findViewById(R.id.profile_picture);
         if (acct != null)
         {
             String personName = acct.getDisplayName();
@@ -92,6 +93,7 @@ public class ProfileFragment extends Fragment {
             Uri personPhoto = acct.getPhotoUrl();
             username.setText(personName);
             email.setText(personEmail);
+            Picasso.get().load(personPhoto).into(profile);
         }
         else
         {
@@ -120,7 +122,7 @@ public class ProfileFragment extends Fragment {
 
                     }
                 });
-                final ImageView profile = v.findViewById(R.id.profile_picture);
+                //final ImageView profile = v.findViewById(R.id.profile_picture);
                 //personEmail=personEmail.replaceAll("\\.", "_dot_");
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference profRef = databaseReference.child("Photos").child(new_email).child("profile");

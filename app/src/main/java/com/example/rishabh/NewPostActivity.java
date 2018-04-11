@@ -89,7 +89,7 @@ public class NewPostActivity extends AppCompatActivity {
     private DatabaseReference mDatabaseRef;
     private StorageTask mUploadTask;
     private ImageView imageView ;
-
+    static boolean imageFlag = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,6 +147,7 @@ public class NewPostActivity extends AppCompatActivity {
                     if(dataSnapshot.getValue()!=null) {
                         Upload upload = dataSnapshot.getValue(Upload.class);
                         Picasso.get().load(upload.getImageUrl()).into(profile);
+                        //imageFlag=true;
                         //mImageUri = Uri.parse(upload.getImageUrl());
                     }
                     else{
@@ -170,9 +171,18 @@ public class NewPostActivity extends AppCompatActivity {
         newPostBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadFile();
+                if(imageFlag) {
+                    uploadFile();
+                }
+                else{
+                    TextView textView = findViewById(R.id.new_post_desc);
+                    String desc = textView.getText().toString();
+                    Upload upload = new Upload(desc,"");
+                    mDatabaseRef.setValue(upload);
+                }
                 Intent intent = new Intent(NewPostActivity.this,MyPost.class);
                 startActivity(intent);
+                finish();
 
             }
         });
@@ -213,7 +223,10 @@ public class NewPostActivity extends AppCompatActivity {
                     TextView textView = findViewById(R.id.new_post_desc);
                     String desc = textView.getText().toString();
                     Log.v("TAG",desc);
-                    Upload upload = new Upload(desc,taskSnapshot.getDownloadUrl().toString());
+                    Upload upload ;
+                        upload=new Upload(desc, taskSnapshot.getDownloadUrl().toString());
+
+
                     Log.v("TAG",desc);
                     //String uploadId = mDatabaseRef.getKey();
                     mDatabaseRef.setValue(upload);
@@ -247,6 +260,7 @@ public class NewPostActivity extends AppCompatActivity {
             Log.v("TAG","IMAGE"+mImageUri.toString());
 
             Picasso.get().load(mImageUri).into(newPostImage);
+            imageFlag=true;
             Log.v("TAG","IMAGE"+mImageUri.toString());
 
         }

@@ -45,6 +45,7 @@ public class DispProfileActivity extends AppCompatActivity {
 
         FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
+        final ImageView profile = findViewById(R.id.disp_profile_picture);
         if(acct!=null){
             String personName = acct.getDisplayName();
             String personGivenName = acct.getGivenName();
@@ -62,6 +63,8 @@ public class DispProfileActivity extends AppCompatActivity {
             passwordView.setVisibility(View.GONE);
             LinearLayout updateView = findViewById(R.id.update_profile);
             updateView.setVisibility(View.GONE);
+
+            Picasso.get().load(personPhoto).into(profile);
         }
         else{
             if(mAuth!=null) {
@@ -106,7 +109,7 @@ public class DispProfileActivity extends AppCompatActivity {
 
                     }
                 });
-                final ImageView profile = findViewById(R.id.disp_profile_picture);
+
                 //personEmail=personEmail.replaceAll("\\.", "_dot_");
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
                 DatabaseReference profRef = databaseReference.child("Photos").child(new_email).child("profile");
