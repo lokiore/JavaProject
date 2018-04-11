@@ -22,13 +22,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
 
+
 public class NewsFeedFragment extends Fragment {
 
-    static String pName = "Google user";
+    static String pName = "Google";
     static String pTime="";
     static String pDesc="";
     static Uri pProfile=null;
@@ -58,7 +61,7 @@ public class NewsFeedFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View rootView=inflater.inflate(R.layout.time_list, container, false);
-        /*FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(getActivity());
         String personEmail;
         if(acct!=null){
@@ -68,16 +71,16 @@ public class NewsFeedFragment extends Fragment {
             personEmail = acct.getEmail();
             String personId = acct.getId();
             Uri personPhoto = acct.getPhotoUrl();
-            pName=personName;
+            //pName=personName;
             pProfile=personPhoto;
-            pEmail=personEmail;
+            //pEmail=personEmail;
 
         }
         else{
             if(mAuth!=null) {
                 String new_email = mAuth.getEmail();
                 new_email = new_email.replaceAll("\\.", "_dot_");
-                pEmail=new_email;
+                //pEmail=new_email;
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
                 final DatabaseReference mDatabase = database.getReference();
                 DatabaseReference myRef = mDatabase.child("users");
@@ -91,7 +94,7 @@ public class NewsFeedFragment extends Fragment {
                         String personEmail = user.get("Email");
                         String personMobile = user.get("Mobile");
                         String personPassword = user.get("Password");
-                        pName=personName;
+                        //pName=personName;
 
                     }
 
@@ -102,46 +105,10 @@ public class NewsFeedFragment extends Fragment {
                 });
                 //final ImageView profile = findViewById(R.id.disp_profile_picture);
                 //personEmail=personEmail.replaceAll("\\.", "_dot_");
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                DatabaseReference profRef = databaseReference.child("Photos").child(new_email).child("profile");
-                if(profRef!=null) {
-                    profRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
-                            //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                            if(dataSnapshot.getValue()!=null) {
-                                Upload upload = dataSnapshot.getValue(Upload.class);
-                                pProfile=Uri.parse(upload.getImageUrl());
-                                //Picasso.get().load(upload.getImageUrl()).into(profile);
-                            }
-                            else{
-                                //profile.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-                else {
-                    Log.v("TAG","YAHOO");
-                }
             }
         }
 
-
-
-
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-        Log.v("TAA",pEmail);
-        pEmail=pEmail.replaceAll("\\.","_dot_");
-        Log.v("TAA","LLKLKLKLJ");
-        Log.v("TAA",pEmail+"ll");
-        Log.v("TAA","LOLOLO");
         DatabaseReference profRef = databaseReference.child("Posts");
         if(profRef!=null) {
             profRef.addValueEventListener(new ValueEventListener() {
@@ -150,16 +117,48 @@ public class NewsFeedFragment extends Fragment {
                     //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
                     posts.clear();
                     for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                        DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference();
-                        DatabaseReference prfRef = databaseReference1.child("Photos");
-
+                        //DatabaseReference databaseReference1 = FirebaseDatabase.getInstance().getReference();
+                        //DatabaseReference prfRef = databaseReference1.child("Photos");
+                        //Log.v("EMAIL1",postSnapshot.getKey());
                         for(DataSnapshot postPostSnapshot : postSnapshot.getChildren()) {
-                            Upload upload = postSnapshot.getValue(Upload.class);
+                            Upload upload = postPostSnapshot.getValue(Upload.class);
                             //Log.v("TAA",postSnapshot.getKey());
                             //Log.v("TAA",dataSnapshot.getKey());
                             pImage = Uri.parse(upload.getImageUrl());
                             pDesc = upload.getName();
-                            pTime = postSnapshot.getKey();
+                            pTime = postPostSnapshot.getKey();
+                            String email = postSnapshot.getKey();
+                            //Log.v("EMAIL",email);
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference profRef = databaseReference.child("Photos").child(email).child("profile");
+                            if(profRef!=null) {
+                                profRef.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
+                                        //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                                        if(dataSnapshot.getValue()!=null) {
+                                            Upload upload = dataSnapshot.getValue(Upload.class);
+                                            pProfile=Uri.parse(upload.getImageUrl());
+                                            pName = upload.getName();
+                                            Log.v("EMAILNAME",pName);
+                                            //Picasso.get().load(upload.getImageUrl()).into(profile);
+                                        }
+                                        else{
+                                            //profile.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                            else {
+                            }
+                            Log.v("EMAIL","YAHOO"+email+" "+pName);
                             if (pImage.equals("")) {
                                 posts.add(new Timeline(1, pName, pDesc, pProfile, pTime, "lk"));
                             } else {
@@ -169,6 +168,7 @@ public class NewsFeedFragment extends Fragment {
                         //Picasso.get().load(upload.getImageUrl()).into(profile);
                     }
 
+                    Collections.sort(posts,new SortArrayList());
                     TimelineAdapter postsAdapter = new TimelineAdapter(getActivity(), posts);
 
                     ListView listView = rootView.findViewById(R.id.list);
@@ -185,7 +185,7 @@ public class NewsFeedFragment extends Fragment {
         }
         else{
             Toast.makeText(getActivity(),"Make Your First Post",Toast.LENGTH_LONG).show();
-        }*/
+        }
     return rootView;
     }
 

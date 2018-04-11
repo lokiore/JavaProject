@@ -28,11 +28,27 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
  * Created by lokiore on 11/4/18.
  */
+
+class SortArrayList implements Comparator<Timeline>{
+    public int compare(Timeline a, Timeline b){
+        if(a.getTimeStamp().compareTo(b.getTimeStamp())<0){
+            return 1;
+        }
+        else{
+            return -1;
+        }
+    }
+}
+
+
 
 public class MyPost extends AppCompatActivity {
     static String pName = "";
@@ -153,7 +169,7 @@ public class MyPost extends AppCompatActivity {
                         }
                         //Picasso.get().load(upload.getImageUrl()).into(profile);
                     }
-
+                    Collections.sort(posts,new SortArrayList());
                     TimelineAdapter postsAdapter = new TimelineAdapter(MyPost.this, posts);
 
                     ListView listView = findViewById(R.id.list_view);

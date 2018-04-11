@@ -62,7 +62,14 @@ public class DispProfileActivity extends AppCompatActivity {
             LinearLayout passwordView = findViewById(R.id.password_layout);
             passwordView.setVisibility(View.GONE);
             Button updateView = findViewById(R.id.update_profile);
-            updateView.setVisibility(View.GONE);
+            updateView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(DispProfileActivity.this, UpdateProfileActivity.class);
+                    startActivity(intent);
+
+                }
+            });
 
             Picasso.get().load(personPhoto).into(profile);
         }
