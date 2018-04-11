@@ -69,10 +69,12 @@ public class OtherUserPhotos extends AppCompatActivity implements GridViewAdapte
 
 
         // mImageView.setVisibility();
-
-        mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
+        Intent intent = getIntent();
+        String new_email = intent.getStringExtra("Email");
+ //       new_email = new_email.replaceAll("\\.", "_dot_");
+        mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("uploads");
         mDatabase = FirebaseDatabase.getInstance();
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference("Photos").child(new_email).child("uploads");
 
 
         mGridView = (GridView) findViewById(R.id.gridView);
@@ -84,7 +86,7 @@ public class OtherUserPhotos extends AppCompatActivity implements GridViewAdapte
 
         mProgressCircle = findViewById(R.id.progressCircle);
 
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        //mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
 
 
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -119,7 +119,7 @@
                 android:gravity="center"
                 android:orientation="horizontal"
                 tools:ignore="ExtraText"
-                android:id="@+id/layout_photo"
+                android:id="@+id/other_photo"
                 android:clickable="true">
 
                 <ImageView

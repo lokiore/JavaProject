@@ -64,6 +64,14 @@ public class OtherUserMainProfile extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+        findViewById(R.id.other_photo).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(OtherUserMainProfile.this,OtherUserPhotos.class);
+                intent1.putExtra("Email",pEmail);
+                startActivity(intent1);
+            }
+        });
 
 
     }
