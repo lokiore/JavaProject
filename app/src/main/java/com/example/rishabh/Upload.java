@@ -3,7 +3,7 @@ package com.example.rishabh;
 public class Upload {
     private String mName;
     private String mImageUrl;
-
+    private String email;
     public Upload() {
         //empty constructor needed
     }
@@ -14,11 +14,19 @@ public class Upload {
         }
 
         mName = name;
+        email=null;
         mImageUrl = imageUrl;
     }
 
     public String getName() {
         return mName;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(String memail){
+        email=memail;
     }
 
     public void setName(String name) {
