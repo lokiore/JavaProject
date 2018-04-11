@@ -108,7 +108,34 @@ public class NewsFeedFragment extends Fragment {
             }
         }
 
+
+
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        DatabaseReference reference = databaseReference.child("Photos");
+        final HashMap<String,Upload> photoMap = new HashMap<>();
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for(DataSnapshot photoSnapshot: dataSnapshot.getChildren()){
+
+                    String email= photoSnapshot.getKey().toString();
+                    for(DataSnapshot profileSnapshot: photoSnapshot.getChildren()) {
+                        if(profileSnapshot.getKey().toString().equals("profile")) {
+                            Upload upload = profileSnapshot.getValue(Upload.class);
+                            photoMap.put(email, upload);
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         DatabaseReference profRef = databaseReference.child("Posts");
         if(profRef!=null) {
             profRef.addValueEventListener(new ValueEventListener() {
@@ -129,35 +156,10 @@ public class NewsFeedFragment extends Fragment {
                             pTime = postPostSnapshot.getKey();
                             String email = postSnapshot.getKey();
                             //Log.v("EMAIL",email);
-                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-                            DatabaseReference profRef = databaseReference.child("Photos").child(email).child("profile");
-                            if(profRef!=null) {
-                                profRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        //DataSnapshot profileSnapshot = dataSnapshot.getChildren();
-                                        //for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                                        if(dataSnapshot.getValue()!=null) {
-                                            Upload upload = dataSnapshot.getValue(Upload.class);
-                                            pProfile=Uri.parse(upload.getImageUrl());
-                                            pName = upload.getName();
-                                            Log.v("EMAILNAME",pName);
-                                            //Picasso.get().load(upload.getImageUrl()).into(profile);
-                                        }
-                                        else{
-                                            //profile.setImageDrawable(getResources().getDrawable(R.drawable.no_profile));
-                                        }
 
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                            else {
-                            }
+                            Upload upload1 = (Upload) photoMap.get(email);
+                            pName = upload1.getName();
+                            pProfile=Uri.parse(upload1.getImageUrl());
                             Log.v("EMAIL","YAHOO"+email+" "+pName);
                             if (pImage.equals("")) {
                                 posts.add(new Timeline(1, pName, pDesc, pProfile, pTime, "lk"));
