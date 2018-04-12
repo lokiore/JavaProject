@@ -330,8 +330,9 @@ public class LoginActivity extends AppCompatActivity {
                     DatabaseReference mUser = myRef.child(new_email);
                     Log.v("Log","Hoja1");
                     HashMap<String,String> user = new HashMap<String, String>();
+
                     user.put("Name",personName);
-                    user.put("Email",new_email);
+                    user.put("Email",personEmail);
                     user.put("Mobile","Mobile");
                     user.put("Password","Google Password");
                     mUser.setValue(user);

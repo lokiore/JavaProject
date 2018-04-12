@@ -18,7 +18,7 @@ public class HomePagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         if (position == 0) {
-            return new MessageFragment();
+            return new OtherUsersFragment();
         } else if (position == 1){
             Log.v("Tag","NewFEdd");
             return new NewsFeedFragment();
