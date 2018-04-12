@@ -67,6 +67,7 @@ public class DispProfileActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     Intent intent = new Intent(DispProfileActivity.this, UpdateProfileActivity.class);
                     startActivity(intent);
+                    finish();
 
                 }
             });

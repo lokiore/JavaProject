@@ -109,7 +109,7 @@ public class UpdateProfileActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     uploadFile();
-                    Intent intent = new Intent(UpdateProfileActivity.this, DispProfileActivity.class);
+                    Intent intent = new Intent(UpdateProfileActivity.this, UpdateProfileActivity.class);
                     startActivity(intent);
                     finish();
                 }
