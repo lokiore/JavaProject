@@ -135,11 +135,11 @@ public class NewPostActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference(new_email).child("Posts").child(timestamp);
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Posts").child(new_email).child(timestamp);
         Log.v("TAG","SID");
-        DatabaseReference profRef = databaseReference.child("Posts").child(new_email).child("lolo");
+        //DatabaseReference profRef = databaseReference.child("Posts").child(new_email).child("lolo");
         Log.v("TAG","RISH");
-        if(profRef!=null) {
+        if(mDatabaseRef!=null) {
             Log.v("TAG","LOK");
-            profRef.addValueEventListener(new ValueEventListener() {
+            mDatabaseRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     //DataSnapshot profileSnapshot = dataSnapshot.getChildren();

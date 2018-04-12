@@ -141,7 +141,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:text="Change Password"
-                android:background="@color/iron"/>
+                android:background="@color/primary_darker"/>
         </LinearLayout>
 
         <LinearLayout
@@ -158,7 +158,7 @@
                 android:textColor="@color/black"
                 android:gravity="center"
                 android:text="Done"
-                android:background="@color/iron"/>
+                android:background="@color/primary_darker"/>
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>

@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +39,8 @@ public class OtherUsersFragment extends Fragment{
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.time_list, container, false);
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
-
+        FirebaseUser muser = FirebaseAuth.getInstance().getCurrentUser();
+        final String memail = muser.getEmail().replaceAll("\\.","_dot_");
         DatabaseReference reference = databaseReference.child("Photos");
         //final HashMap<String,Upload> photoMap = new HashMap<>();
         final ArrayList<Upload> totalUsers = new ArrayList<>();
@@ -48,14 +51,16 @@ public class OtherUsersFragment extends Fragment{
                 for(DataSnapshot photoSnapshot: dataSnapshot.getChildren()){
 
                     String email= photoSnapshot.getKey().toString();
-                    for(DataSnapshot profileSnapshot: photoSnapshot.getChildren()) {
-                        if(profileSnapshot.getKey().toString().equals("profile")) {
-                            Upload upload = profileSnapshot.getValue(Upload.class);
-                            upload.setEmail(email);
+                    if(!email.equals(memail)) {
+                        for (DataSnapshot profileSnapshot : photoSnapshot.getChildren()) {
+                            if (profileSnapshot.getKey().toString().equals("profile")) {
+                                Upload upload = profileSnapshot.getValue(Upload.class);
+                                upload.setEmail(email);
 
-                            //photoMap.put(email, upload);
-                            totalUsers.add(upload);
+                                //photoMap.put(email, upload);
+                                totalUsers.add(upload);
 
+                            }
                         }
                     }
                 }

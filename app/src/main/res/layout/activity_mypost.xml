@@ -10,7 +10,7 @@
         android:id="@+id/new_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Add New post" />
     <ListView
     android:id="@+id/list_view"
     android:layout_width="fill_parent"

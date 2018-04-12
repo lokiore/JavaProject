@@ -51,7 +51,12 @@ public class TimelineAdapter extends ArrayAdapter<Timeline> {
         timelineUsername.setText(timeline.getName());
 
         TextView timelineTime = listViewItem.findViewById(R.id.time);
-        timelineTime.setText(timeline.getTimeStamp());
+        String mdate = timeline.getTimeStamp().substring(0,10);
+        String mtime = timeline.getTimeStamp().substring(11,19);
+        timelineTime.setText(mtime);
+
+        TextView dateTime = listViewItem.findViewById(R.id.date);
+        dateTime.setText(mdate);
 
         TextView timelinePost = listViewItem.findViewById(R.id.timeline_post);
         timelinePost.setText(timeline.getStatus());

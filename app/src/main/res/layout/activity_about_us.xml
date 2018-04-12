@@ -1,8 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="match_parent" tools:context=".AboutUs">
     <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-        <ImageView android:layout_width="match_parent" android:layout_height="250dp" android:src="@drawable/no_profile"/>
+        <ImageView android:layout_width="match_parent" android:layout_height="250dp" android:src="@drawable/about_us"/>
         <LinearLayout android:layout_marginTop="10dp" android:layout_marginLeft="10dp" android:layout_marginRight="10dp" android:layout_marginBottom="16dp" android:background="@color/primary_dark" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical">
-            <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:fontFamily="@font/alex_brush" android:textSize="20dp" android:text="VConnect is a college social networking app made by three friends as thier JAVA Project in 3rd year under the supervision of Dr. A.P Mazumdaar.\nThe Friends Were :Lokesh Khurana(2015ucp1491)\n - 3rd year CSE\nRishab Mittal(2015ucp1715) - 3rd year CSE\nSiddhartha Singh Dikhit(2015ucp1773) - 3rd year CSE"/>
+            <TextView android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:fontFamily="@font/alex_brush"
+                android:textSize="20dp"
+                android:textAlignment="center"
+                android:gravity="center" android:text="Under the Supervision of \nDr. Arka Prokash Mazumdar\n\nRishabh Mittal (2015UCP1715)\nSiddartha Singh Dikhit (2015UCP1773)\nLokesh Khurana (2015UCP1491)"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
