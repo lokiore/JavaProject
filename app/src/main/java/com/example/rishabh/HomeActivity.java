@@ -34,11 +34,12 @@ public class HomeActivity extends AppCompatActivity {
         tabAdd.setIcon(R.drawable.ic_account_circle_black_24dp);
         TabLayout.Tab tabAdd1 = tabLayout.getTabAt(1);
         tabAdd1.setCustomView(R.layout.tab_layout_custom_view);
-        tabAdd1.setText("Add");
+        //tabAdd1.setText("Add");
         tabAdd1.setIcon(R.drawable.ic_keyboard_arrow_right_black_24dp).setText("Add");
-        TabLayout.Tab tabAdd2 = tabLayout.getTabAt(0);
+        TabLayout.Tab tabAdd2 = tabLayout.getTabAt(2);
         tabAdd2.setCustomView(R.layout.tab_layout_custom_view);
-        tabAdd2.setText("Add");
-        tabAdd2.setIcon(R.drawable.ic_account_circle_black_24dp).setText("Add");
+        tabAdd2.setIcon(R.drawable.ic_account_circle_black_24dp);
+        //tabAdd2.setText("Add");
+        //tabAdd2.setIcon(R.drawable.ic_account_circle_black_24dp).setText("Add");
     }
 }

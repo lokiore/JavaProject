@@ -86,7 +86,7 @@
         <ImageView
             android:id="@+id/timeline_post_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:background="@color/white"
             android:scaleType="fitXY"
             android:visibility="visible"
