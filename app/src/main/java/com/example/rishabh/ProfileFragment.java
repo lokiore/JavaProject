@@ -237,7 +237,13 @@ public class ProfileFragment extends Fragment {
         });
 
 
-
+        v.findViewById(R.id.about_us).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),AboutUs.class);
+                startActivity(intent);
+            }
+        });
 
 
 

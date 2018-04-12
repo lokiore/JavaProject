@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/feed_bg"
+    android:background="@color/primary_dark"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -55,6 +55,13 @@
                     android:textColor="@color/timestamp"
                     android:text="12:30PM"
                     android:textSize="@dimen/feed_item_timestamp" />
+                <TextView
+                    android:id="@+id/date"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/timestamp"
+                    android:text="12:30PM"
+                    android:textSize="@dimen/feed_item_timestamp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -86,7 +93,7 @@
         <ImageView
             android:id="@+id/timeline_post_photo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="400dp"
             android:background="@color/white"
             android:scaleType="fitXY"
             android:visibility="visible"

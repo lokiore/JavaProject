@@ -2,6 +2,7 @@ package com.example.rishabh;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -122,6 +123,11 @@ public class SignupActivity extends AppCompatActivity {
                             user.put("Password",password);
                             mUser.setValue(user);
                             Log.v("Log","Hoja");
+                            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference reference = databaseReference.child("Photos").child(new_email).child("profile");
+                            Uri uri = Uri.parse("android.resource://com.example.rishabh/drawable/no_profile");
+                            Upload upload=new Upload(name,uri.toString());
+                            reference.setValue(upload);
                             FirebaseAuth auth = FirebaseAuth.getInstance();
                             final FirebaseUser muser = auth.getCurrentUser();
 

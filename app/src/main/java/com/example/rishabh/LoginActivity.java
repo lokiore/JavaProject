@@ -305,10 +305,10 @@ public class LoginActivity extends AppCompatActivity {
             String msg = "";
             if (currentUser.getEmail().endsWith("@mnit.ac.in")) {
                 access = true;
-                msg = "User: " + currentUser.getDisplayName() + "\nEmail: " + currentUser.getEmail()
+                msg = "User: "  + currentUser.getEmail()
                         + "\nAccess: Granted";
             } else
-                msg = "User: " + currentUser.getDisplayName() + "\nEmail: " + currentUser.getEmail()
+                msg = "User: " + currentUser.getEmail()
                         + "\nAccess: Denied";
 
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
@@ -349,6 +349,9 @@ public class LoginActivity extends AppCompatActivity {
             else {
                 //signOut();
                 signOut();
+                Intent intent = new Intent(this,LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         }
         else {
@@ -378,7 +381,7 @@ public class LoginActivity extends AppCompatActivity {
                             //mProgressBar.setProgress(0);
                         }
                     },500);
-                    Toast.makeText(LoginActivity.this,"Upload successful",Toast.LENGTH_LONG).show();
+                    //Toast.makeText(LoginActivity.this,"Upload successful",Toast.LENGTH_LONG).show();
                     TextView tname = findViewById(R.id.update_name);
                     String name = tname.getText().toString();
                     Upload upload = new Upload(name,taskSnapshot.getDownloadUrl().toString());
@@ -388,7 +391,7 @@ public class LoginActivity extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     Log.v("GMAIL",e.getMessage());
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

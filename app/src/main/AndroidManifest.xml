@@ -30,6 +30,8 @@
         <activity android:name="com.example.rishabh.OtherUserPosts" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.OtherUserPhotos" android:theme="@style/AppTheme.Dark" />
         <activity android:name="com.example.rishabh.MyPhotos" android:theme="@style/AppTheme.Dark" />
+        <activity android:name="com.example.rishabh.AboutUs" android:theme="@style/AppTheme.Dark" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

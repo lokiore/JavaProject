@@ -79,6 +79,8 @@ public class MyPhotos extends AppCompatActivity implements GridViewAdapter.OnIte
         mButtonUpload = (Button) findViewById(R.id.button_upload);
         mImageView = (ImageView) findViewById(R.id.image_view);
         mProgressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        mProgressBar.setVisibility(View.GONE);
+        mImageView.setVisibility(View.GONE);
 
         // mImageView.setVisibility();
         final FirebaseUser mAuth = FirebaseAuth.getInstance().getCurrentUser();
